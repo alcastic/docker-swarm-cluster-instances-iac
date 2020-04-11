@@ -1,0 +1,5 @@
+.idea/
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+docker-swarm-0001_service-account-credentials.json
