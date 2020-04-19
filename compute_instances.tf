@@ -1,4 +1,4 @@
-resource "google_compute_instance" "swarm-master-node" {
+resource "google_compute_instance" "swarm-master-nodes" {
   count = var.swarm_master_nodes
   name = "swarm-master-node-${format("%02s", count.index)}"
   machine_type = "n1-standard-1"
@@ -10,19 +10,19 @@ resource "google_compute_instance" "swarm-master-node" {
 
   boot_disk {
     initialize_params {
-      image = "cos-cloud/cos-stable"
+      image = var.os-cluster-instances
     }
   }
 
   network_interface {
-    network = var.swarm_cluster_network
+    network = google_compute_network.docker_swarm.name
     access_config {
       // Ephemeral IP
     }
   }
 }
 
-resource "google_compute_instance" "swarm-worker-node" {
+resource "google_compute_instance" "swarm-worker-nodes" {
   count = var.swarm_worker_nodes
   name = "swarm-worker-node-${format("%02s", count.index)}"
   machine_type = "g1-small"
@@ -34,12 +34,12 @@ resource "google_compute_instance" "swarm-worker-node" {
 
   boot_disk {
     initialize_params {
-      image = "cos-cloud/cos-stable"
+      image = var.os-cluster-instances
     }
   }
 
   network_interface {
-    network = var.swarm_cluster_network
+    network = google_compute_network.docker_swarm.name
     access_config {
       // Ephemeral IP
     }
