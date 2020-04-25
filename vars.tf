@@ -16,5 +16,5 @@ variable "swarm_master_nodes" {
 }
 
 variable "swarm_worker_nodes" {
-  default = "3"
+  default = "2"
 }
