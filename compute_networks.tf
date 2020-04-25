@@ -14,6 +14,7 @@ resource "google_compute_firewall" "docker_swarm" {
     protocol = "tcp"
     ports = [
       "22",
+      "8080",
       "2377",
       "7946"]
   }
